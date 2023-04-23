@@ -45,7 +45,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         let firstLineRange = firstLine.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
         let firstNonWhitespaceColumn = firstLineRange.location == NSNotFound ? firstLine.length : firstLineRange.location
         let firstLineCode = firstLine.substring(from: firstNonWhitespaceColumn)
-        let shouldComment = !firstLineCode.hasPrefix("// ")
+        let shouldComment = !firstLineCode.hasPrefix("//") && !firstLineCode.hasPrefix("// ")
         
         for index in startLine...endLine {
             guard let line = lines.object(at: index) as? NSString else { continue }
@@ -57,12 +57,12 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             } else if firstNonWhitespaceColumn < line.length {
                 let linePrefix = line.substring(to: firstNonWhitespaceColumn)
                 let code = line.substring(from: firstNonWhitespaceColumn)
-                let commented = code.hasPrefix("// ")
+                let commented = code.hasPrefix("//") || code.hasPrefix("// ")
                 
                 if shouldComment && !commented {
                     lines[index] = linePrefix + "// " + code
                 } else if !shouldComment && commented {
-                    let uncommentedCode = code.replacingOccurrences(of: "// ", with: "", options: .anchored)
+                    let uncommentedCode = code.replacingOccurrences(of: "// ?", with: "", options: .regularExpression)
                     lines[index] = linePrefix + uncommentedCode
                 }
             }
