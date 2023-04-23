@@ -11,18 +11,7 @@ import XcodeKit
 
 class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     
-    private func removeComment(in lines: NSMutableArray, atIndex index: Int) {
-        guard let line = lines.object(at: index) as? NSString else { return }
-        let newLine = line.replacingOccurrences(of: "*/", with: "").replacingOccurrences(of: "/*", with: "")
-        if newLine.isEmptyLine {
-            lines.removeObject(at: index)
-        } else {
-            lines[index] = newLine
-        }
-    }
-    
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
-        // Implement your command here, invoking the completion handler when done. Pass it nil on success, and an NSError on failure.
         
         print("--------------command start--------------")
         let buffer = invocation.buffer
@@ -36,8 +25,6 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             return
         }
         
-        let isEmptyRange = (selections.count == 1 && startRange.isEmpty)
-        
         print("start at \(startRange)")
         print("end at \(endRange)")
         
@@ -50,89 +37,40 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             endLine = endRange.end.line
         }
         
-        guard let startString = buffer.lines.object(at: max(0, startLine)) as? String,
-            let endString = buffer.lines.object(at: min(endLine, buffer.lines.count - 1)) as? String,
-            let preString = buffer.lines.object(at: max(0, startLine - 1)) as? String,
-            let postString = buffer.lines.object(at: min(endLine + 1, buffer.lines.count - 1)) as? String
-        else {
+        guard let firstLine = lines.object(at: startLine) as? NSString else {
             completionHandler(nil)
             return
         }
         
-        print("startLine is \(startString)")
-        print("endLine is \(endString)")
-        print("preLine is \(preString)")
-        print("postLine is \(postString)")
-
-        let commented: Bool
-        let surrounded: Bool
+        let firstLineRange = firstLine.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
+        let firstNonWhitespaceColumn = firstLineRange.location == NSNotFound ? firstLine.length : firstLineRange.location
+        let firstLineCode = firstLine.substring(from: firstNonWhitespaceColumn)
+        let shouldComment = !firstLineCode.hasPrefix("// ")
         
-        if startString.drop(while: { (c) -> Bool in
-            [" ", "\t"].contains(c)
-        }).starts(with: "/*") && endString.drop(while: { (c) -> Bool in
-            [" ", "\t"].contains(c)
-        }).starts(with: "*/") {
-            commented = true
-            surrounded = false
-        } else if preString.drop(while: { (c) -> Bool in
-            [" ", "\t"].contains(c)
-        }).starts(with: "/*") && postString.drop(while: { (c) -> Bool in
-            [" ", "\t"].contains(c)
-        }).starts(with: "*/") {
-            commented = true
-            surrounded = true
-        } else {
-            commented = false
-            surrounded = false
-        }
-        
-        print("commented \(commented)")
-        print("surrounded \(surrounded)")
-    
-        if commented {
+        for index in startLine...endLine {
+            guard let line = lines.object(at: index) as? NSString else { continue }
+            let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
+            let firstNonWhitespaceColumn = range.location == NSNotFound ? line.length : range.location
             
-            if surrounded {
-                removeComment(in: lines, atIndex: endLine + 1)
-                removeComment(in: lines, atIndex: startLine - 1)
-            } else {
-                removeComment(in: lines, atIndex: endLine)
-                removeComment(in: lines, atIndex: startLine)
-            }
-            
-        } else {
-            var numberOfIndentationCharacter = Int.max
-            for index in startLine...endLine {
-                if let line = lines.object(at: index) as? String {
-                    if line == "\n" && startLine != endLine { continue }
-                    numberOfIndentationCharacter = min(line.prefix{ [" ", "\t"].contains($0) }.reduce(0){ $0 + ($1 == "\t" ? buffer.tabWidth : 1) }, numberOfIndentationCharacter)
+            if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmptyLine {
+                continue
+            } else if firstNonWhitespaceColumn < line.length {
+                let linePrefix = line.substring(to: firstNonWhitespaceColumn)
+                let code = line.substring(from: firstNonWhitespaceColumn)
+                let commented = code.hasPrefix("// ")
+                
+                if shouldComment && !commented {
+                    lines[index] = linePrefix + "// " + code
+                } else if !shouldComment && commented {
+                    let uncommentedCode = code.replacingOccurrences(of: "// ", with: "", options: .anchored)
+                    lines[index] = linePrefix + uncommentedCode
                 }
             }
-            
-            var prefix: String
-            if buffer.usesTabsForIndentation {
-                prefix = Array<String>.init(repeating: "\t", count: numberOfIndentationCharacter / buffer.tabWidth).joined() + Array<String>.init(repeating: " ", count: numberOfIndentationCharacter % buffer.tabWidth).joined()
-            } else {
-                prefix = Array<String>.init(repeating: " ", count: numberOfIndentationCharacter).joined()
-            }
-            
-            print("insert \"\(prefix)*/\"at line \(endLine + 1)")
-            lines.insert("\(prefix)*/", at: endLine + 1)
-            print("insert \"\(prefix)/*\"at line \(startLine)")
-            lines.insert("\(prefix)/*", at: startLine)
-            
-            if startRange.start.column == 0 {
-                startRange.start.line += 1
-                if isEmptyRange {
-                    endRange.end.line += 1
-                }
-            }
-
         }
 
         completionHandler(nil)
         
         print("final selections are \(selections)")
-        
         print("--------------command end--------------")
     }
     
