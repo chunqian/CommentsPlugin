@@ -37,15 +37,26 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             endLine = endRange.end.line
         }
         
-        guard let firstLine = lines.object(at: startLine) as? NSString else {
-            completionHandler(nil)
-            return
-        }
+        // guard let firstLine = lines.object(at: startLine) as? NSString else {
+            // completionHandler(nil)
+            // return
+        // }
         
-        let firstLineRange = firstLine.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
-        let firstNonWhitespaceColumn = firstLineRange.location == NSNotFound ? firstLine.length : firstLineRange.location
-        let firstLineCode = firstLine.substring(from: firstNonWhitespaceColumn)
-        let shouldComment = !firstLineCode.hasPrefix("//") && !firstLineCode.hasPrefix("// ")
+        // let firstLineRange = firstLine.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
+        // let firstNonWhitespaceColumn = firstLineRange.location == NSNotFound ? firstLine.length : firstLineRange.location
+        // let firstLineCode = firstLine.substring(from: firstNonWhitespaceColumn)
+        // let shouldComment = !firstLineCode.hasPrefix("//") && !firstLineCode.hasPrefix("// ")
+        
+        var shouldComment = false
+        
+        for index in startLine...endLine {
+            guard let line = lines.object(at: index) as? NSString else { continue }
+            let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !code.isEmptyLine && !code.hasPrefix("//") && !code.hasPrefix("// ") {
+                shouldComment = true
+                break
+            }
+        }
         
         for index in startLine...endLine {
             guard let line = lines.object(at: index) as? NSString else { continue }
@@ -59,10 +70,10 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                 let code = line.substring(from: firstNonWhitespaceColumn)
                 let commented = code.hasPrefix("//") || code.hasPrefix("// ")
                 
-                if shouldComment && !commented {
+                if shouldComment {
                     lines[index] = linePrefix + "// " + code
                 } else if !shouldComment && commented {
-                    let uncommentedCode = code.replacingOccurrences(of: "// ?", with: "", options: .regularExpression)
+                    let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
                     lines[index] = linePrefix + uncommentedCode
                 }
             }
