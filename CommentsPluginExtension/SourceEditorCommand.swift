@@ -38,26 +38,33 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         }
 
         var shouldComment = false
+        var commentIndex: Int? = nil
 
         for index in startLine...endLine {
             guard let line = lines.object(at: index) as? NSString else { continue }
             let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
+            if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmptyLine {
+                continue
+            }
+            commentIndex = commentIndex == nil ? range.location : min(commentIndex!, range.location)
             if !code.isEmptyLine && !code.hasPrefix("//") && !code.hasPrefix("// ") {
                 shouldComment = true
-                break
+                continue
             }
         }
 
         for index in startLine...endLine {
             guard let line = lines.object(at: index) as? NSString else { continue }
-            let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
-            let firstNonWhitespaceColumn = range.location == NSNotFound ? line.length : range.location
+            // let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
+            // let firstNonWhitespaceColumn = range.location == NSNotFound ? line.length : range.location
             
             if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmptyLine {
                 continue
-            } else if firstNonWhitespaceColumn < line.length {
-                let linePrefix = line.substring(to: firstNonWhitespaceColumn)
-                let code = line.substring(from: firstNonWhitespaceColumn)
+            } else if commentIndex! < line.length {
+                let linePrefix = line.substring(to: commentIndex!)
+                let code = line.substring(from: commentIndex!)
                 let commented = code.hasPrefix("//") || code.hasPrefix("// ")
                 
                 if shouldComment {
