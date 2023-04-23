@@ -10,9 +10,9 @@ import Foundation
 import XcodeKit
 
 class SourceEditorCommand: NSObject, XCSourceEditorCommand {
-    
+
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
-        
+
         print("--------------command start--------------")
         let buffer = invocation.buffer
         let selections = buffer.selections
@@ -24,31 +24,21 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             completionHandler(nil)
             return
         }
-        
+
         print("start at \(startRange)")
         print("end at \(endRange)")
-        
+
         let startLine = startRange.start.line
-        
+
         let endLine: Int
         if endRange.end.column == 0 && endRange.end.line > startLine {
             endLine = endRange.end.line - 1
         } else {
             endLine = endRange.end.line
         }
-        
-        // guard let firstLine = lines.object(at: startLine) as? NSString else {
-            // completionHandler(nil)
-            // return
-        // }
-        
-        // let firstLineRange = firstLine.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
-        // let firstNonWhitespaceColumn = firstLineRange.location == NSNotFound ? firstLine.length : firstLineRange.location
-        // let firstLineCode = firstLine.substring(from: firstNonWhitespaceColumn)
-        // let shouldComment = !firstLineCode.hasPrefix("//") && !firstLineCode.hasPrefix("// ")
-        
+
         var shouldComment = false
-        
+
         for index in startLine...endLine {
             guard let line = lines.object(at: index) as? NSString else { continue }
             let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -57,7 +47,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                 break
             }
         }
-        
+
         for index in startLine...endLine {
             guard let line = lines.object(at: index) as? NSString else { continue }
             let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
@@ -80,7 +70,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         }
 
         completionHandler(nil)
-        
+
         print("final selections are \(selections)")
         print("--------------command end--------------")
     }
