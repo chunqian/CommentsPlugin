@@ -12,35 +12,35 @@ import XcodeKit
 class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     
     private var cursorShift: Int = 0
-
+    
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
-
+        
         cursorShift = 0
         print("--------------command start--------------")
         let buffer = invocation.buffer
         let selections = buffer.selections
         let numberOfSelections = selections.count
         let lines = buffer.lines
-
+        
         guard let startRange = selections.firstObject as? XCSourceTextRange,
             let endRange = selections.lastObject as? XCSourceTextRange
         else {
             completionHandler(nil)
             return
         }
-
+        
         print("start at \(startRange)")
         print("end at \(endRange)")
-
+        
         let startLine = startRange.start.line
-
+        
         let endLine: Int
         if endRange.end.column == 0 && endRange.end.line > startLine {
             endLine = endRange.end.line - 1
         } else {
             endLine = endRange.end.line
         }
-
+        
         var shouldComment = false
         var commentIndex: Int? = nil
         
@@ -58,7 +58,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                     continue
                 }
             }
-
+            
             for index in startLine...endLine {
                 guard let line = lines.object(at: index) as? NSString else { continue }
                 
@@ -88,7 +88,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                 }
             }
         }
-
+        
         // 多行
         if numberOfSelections > 1 {
             for index in startLine...endLine {
@@ -105,7 +105,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                     continue
                 }
             }
-
+            
             for index in startLine...endLine {
                 guard let line = lines.object(at: index) as? NSString else { continue }
                 
@@ -127,9 +127,9 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                 }
             }
         }
-
+        
         completionHandler(nil)
-
+        
         print("final selections are \(selections)")
         print("--------------command end--------------")
     }
