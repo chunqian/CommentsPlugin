@@ -33,7 +33,6 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         startSelection = (startRange.start.column, startRange.end.column)
         endSelection = (endRange.start.column, endRange.end.column)
         
-        
         print("start at \(startRange)")
         print("end at \(endRange)")
         
