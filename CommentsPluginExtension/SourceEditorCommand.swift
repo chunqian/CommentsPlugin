@@ -43,44 +43,41 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
 
         var shouldComment = false
         var commentIndex: Int? = nil
-
-        for index in startLine...endLine {
-            guard let line = lines.object(at: index) as? NSString else { continue }
-            let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
-            
-            let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
-            if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmptyLine {
-                continue
-            }
-            commentIndex = commentIndex == nil ? range.location : min(commentIndex!, range.location)
-            if !code.isEmptyLine && !code.hasPrefix("//") && !code.hasPrefix("// ") {
-                shouldComment = true
-                continue
-            }
-        }
-
-        for index in startLine...endLine {
-            guard let line = lines.object(at: index) as? NSString else { continue }
-            
-            if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmptyLine {
-                continue
-            } else if commentIndex! < line.length {
-                let linePrefix = line.substring(to: commentIndex!)
-                let code = line.substring(from: commentIndex!)
-                let commented = code.hasPrefix("//") || code.hasPrefix("// ")
+        
+        // 单行
+        if numberOfSelections == 1 {
+            for index in startLine...endLine {
+                guard let line = lines.object(at: index) as? NSString else { continue }
+                let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
                 
-                if shouldComment {
-                    lines[index] = linePrefix + "// " + code
-                    cursorShift += 3
-                } else if !shouldComment && commented {
-                    let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
-                    lines[index] = linePrefix + uncommentedCode
-                    cursorShift += 3
+                let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
+                
+                commentIndex = commentIndex == nil ? range.location : min(commentIndex!, range.location)
+                if !code.hasPrefix("//") && !code.hasPrefix("// ") {
+                    shouldComment = true
+                    continue
                 }
             }
-        }
-        
-        if numberOfSelections == 1 {
+
+            for index in startLine...endLine {
+                guard let line = lines.object(at: index) as? NSString else { continue }
+                
+                if commentIndex! < line.length {
+                    let linePrefix = line.substring(to: commentIndex!)
+                    let code = line.substring(from: commentIndex!)
+                    let commented = code.hasPrefix("//") || code.hasPrefix("// ")
+                    
+                    if shouldComment {
+                        lines[index] = linePrefix + "// " + code
+                        cursorShift += 3
+                    } else if !shouldComment && commented {
+                        let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
+                        lines[index] = linePrefix + uncommentedCode
+                        cursorShift += 3
+                    }
+                }
+            }
+            
             for range in selections as! [XCSourceTextRange] {
                 if shouldComment {
                     range.start.column += cursorShift
@@ -88,6 +85,45 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                 } else {
                     range.start.column -= cursorShift
                     range.end.column -= cursorShift
+                }
+            }
+        }
+
+        // 多行
+        if numberOfSelections > 1 {
+            for index in startLine...endLine {
+                guard let line = lines.object(at: index) as? NSString else { continue }
+                let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
+                if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmptyLine {
+                    continue
+                }
+                commentIndex = commentIndex == nil ? range.location : min(commentIndex!, range.location)
+                if !code.isEmptyLine && !code.hasPrefix("//") && !code.hasPrefix("// ") {
+                    shouldComment = true
+                    continue
+                }
+            }
+
+            for index in startLine...endLine {
+                guard let line = lines.object(at: index) as? NSString else { continue }
+                
+                if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmptyLine {
+                    continue
+                } else if commentIndex! < line.length {
+                    let linePrefix = line.substring(to: commentIndex!)
+                    let code = line.substring(from: commentIndex!)
+                    let commented = code.hasPrefix("//") || code.hasPrefix("// ")
+                    
+                    if shouldComment {
+                        lines[index] = linePrefix + "// " + code
+                        cursorShift += 3
+                    } else if !shouldComment && commented {
+                        let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
+                        lines[index] = linePrefix + uncommentedCode
+                        cursorShift += 3
+                    }
                 }
             }
         }
