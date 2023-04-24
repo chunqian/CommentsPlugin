@@ -49,8 +49,20 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         var shouldComment = false
         var commentIndex: Int? = nil
         
+        // 空行
+        var isEmptyLines = true
+        for index in startLine...endLine {
+            guard let line = lines.object(at: index) as? NSString else { continue }
+            let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if !code.isEmptyLine {
+                isEmptyLines = false
+                break
+            }
+        }
+        
         // 单行
-        if numberOfSelectionLines == 0 {
+        if numberOfSelectionLines == 0 || isEmptyLines {
             for index in startLine...endLine {
                 guard let line = lines.object(at: index) as? NSString else { continue }
                 let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -99,7 +111,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         }
         
         // 多行
-        if numberOfSelectionLines > 0 {
+        if numberOfSelectionLines > 0 && !isEmptyLines {
             for index in startLine...endLine {
                 guard let line = lines.object(at: index) as? NSString else { continue }
                 let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
