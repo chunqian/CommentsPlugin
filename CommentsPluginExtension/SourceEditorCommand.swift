@@ -9,6 +9,7 @@
 import Foundation
 import XcodeKit
 
+
 class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     
     private var cursorShift: Int = 0
@@ -73,20 +74,13 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                     } else if !shouldComment && commented {
                         let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
                         lines[index] = linePrefix + uncommentedCode
-                        cursorShift += 3
+                        cursorShift -= 3
                     }
                 }
             }
             
-            for range in selections as! [XCSourceTextRange] {
-                if shouldComment {
-                    range.start.column += cursorShift
-                    range.end.column += cursorShift
-                } else {
-                    range.start.column -= cursorShift
-                    range.end.column -= cursorShift
-                }
-            }
+            startRange.start.column += cursorShift
+            endRange.end.column += cursorShift
         }
         
         // 多行
@@ -122,10 +116,13 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                     } else if !shouldComment && commented {
                         let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
                         lines[index] = linePrefix + uncommentedCode
-                        cursorShift += 3
+                        cursorShift -= 3
                     }
                 }
             }
+            
+            startRange.start.column += cursorShift
+            endRange.end.column += cursorShift
         }
         
         completionHandler(nil)
@@ -135,6 +132,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     }
     
 }
+
 
 extension String {
     var isEmptyLine: Bool {
@@ -148,6 +146,7 @@ extension String {
         return result
     }
 }
+
 
 extension XCSourceTextRange {
     var isEmpty: Bool {
