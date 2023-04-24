@@ -10,12 +10,16 @@ import Foundation
 import XcodeKit
 
 class SourceEditorCommand: NSObject, XCSourceEditorCommand {
+    
+    private var cursorShift: Int = 0
 
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
 
+        cursorShift = 0
         print("--------------command start--------------")
         let buffer = invocation.buffer
         let selections = buffer.selections
+        let numberOfSelections = selections.count
         let lines = buffer.lines
 
         guard let startRange = selections.firstObject as? XCSourceTextRange,
@@ -57,8 +61,6 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
 
         for index in startLine...endLine {
             guard let line = lines.object(at: index) as? NSString else { continue }
-            // let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
-            // let firstNonWhitespaceColumn = range.location == NSNotFound ? line.length : range.location
             
             if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmptyLine {
                 continue
@@ -69,9 +71,23 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                 
                 if shouldComment {
                     lines[index] = linePrefix + "// " + code
+                    cursorShift += 3
                 } else if !shouldComment && commented {
                     let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
                     lines[index] = linePrefix + uncommentedCode
+                    cursorShift += 3
+                }
+            }
+        }
+        
+        if numberOfSelections == 1 {
+            for range in selections as! [XCSourceTextRange] {
+                if shouldComment {
+                    range.start.column += cursorShift
+                    range.end.column += cursorShift
+                } else {
+                    range.start.column -= cursorShift
+                    range.end.column -= cursorShift
                 }
             }
         }
