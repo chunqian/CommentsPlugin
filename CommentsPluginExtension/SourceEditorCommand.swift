@@ -78,6 +78,11 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                         if startSelection.start > linePrefix.count {
                             startSelection.start = min(startSelection.start + 3, (lines[index] as? String)?.count ?? 0)
                             startSelection.end = min(startSelection.end + 3, (lines[index] as? String)?.count ?? 0)
+                        } else {
+                            if code.isEmptyLine {
+                                startSelection.start = (lines[index] as? String)?.count ?? 0 + 3
+                                startSelection.end = (lines[index] as? String)?.count ?? 0 + 3
+                            }
                         }
                     } else if !shouldComment && commented {
                         let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
