@@ -86,7 +86,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                     
                     if shouldComment {
                         lines[index] = linePrefix + "// " + code
-                        if startSelection.start > linePrefix.count {
+                        if startSelection.start >= linePrefix.count {
                             startSelection.start = min(startSelection.start + 3, (lines[index] as? String)?.count ?? 0)
                             startSelection.end = min(startSelection.end + 3, (lines[index] as? String)?.count ?? 0)
                         } else {
@@ -98,7 +98,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                     } else if !shouldComment && commented {
                         let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
                         lines[index] = linePrefix + uncommentedCode
-                        if startSelection.start > linePrefix.count {
+                        if startSelection.start >= linePrefix.count {
                             startSelection.start = max(startSelection.start - 3, commentIndex!)
                             startSelection.end = max(startSelection.end - 3, commentIndex!)
                         }
@@ -140,13 +140,13 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                     if shouldComment {
                         lines[index] = linePrefix + "// " + code
                         if index == startLine {
-                            if startSelection.start > linePrefix.count {
+                            if startSelection.start >= linePrefix.count {
                                 startSelection.start = min(startSelection.start + 3, (lines[index] as? String)?.count ?? 0)
                                 startSelection.end = min(startSelection.end + 3, (lines[index] as? String)?.count ?? 0)
                             }
                         }
                         if index == endLine {
-                            if endSelection.start > linePrefix.count {
+                            if endSelection.start >= linePrefix.count {
                                 endSelection.start = min(endSelection.start + 3, (lines[index] as? String)?.count ?? 0)
                                 endSelection.end = min(endSelection.end + 3, (lines[index] as? String)?.count ?? 0)
                             }
@@ -155,13 +155,13 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                         let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
                         lines[index] = linePrefix + uncommentedCode
                         if index == startLine {
-                            if startSelection.start > linePrefix.count {
+                            if startSelection.start >= linePrefix.count {
                                 startSelection.start = max(startSelection.start - 3, commentIndex!)
                                 startSelection.end = max(startSelection.end - 3, commentIndex!)
                             }
                         }
                         if index == endLine {
-                            if endSelection.start > linePrefix.count {
+                            if endSelection.start >= linePrefix.count {
                                 endSelection.start = max(endSelection.start - 3, commentIndex!)
                                 endSelection.end = max(endSelection.end - 3, commentIndex!)
                             }
