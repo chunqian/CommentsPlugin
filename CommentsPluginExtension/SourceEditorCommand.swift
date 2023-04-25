@@ -19,8 +19,8 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         let selections = buffer.selections
         let lines = buffer.lines
         
-        var startSelection: (start: Int, end: Int) = (0, 0)
-        var endSelection: (start: Int, end: Int) = (0, 0)
+        var startColumn: Int = 0
+        var endColumn: Int = 0
         var numberOfSelectionLines: Int = 0
         
         guard let startRange = selections.firstObject as? XCSourceTextRange,
@@ -30,8 +30,8 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             return
         }
         
-        startSelection = (startRange.start.column, startRange.end.column)
-        endSelection = (endRange.start.column, endRange.end.column)
+        startColumn = startRange.start.column
+        endColumn = endRange.end.column
         
         print("start at \(startRange)")
         print("end at \(endRange)")
@@ -86,28 +86,28 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                     
                     if shouldComment {
                         lines[index] = linePrefix + "// " + code
-                        if startSelection.start >= linePrefix.count {
-                            startSelection.start = min(startSelection.start + 3, (lines[index] as? String)?.count ?? 0)
-                            startSelection.end = min(startSelection.end + 3, (lines[index] as? String)?.count ?? 0)
+                        if startColumn >= linePrefix.count {
+                            startColumn = min(startColumn + 3, (lines[index] as? String)?.count ?? 0)
+                            endColumn = min(endColumn + 3, (lines[index] as? String)?.count ?? 0)
                         } else {
                             if code.isEmptyLine {
-                                startSelection.start = (lines[index] as? String)?.count ?? 0 + 3
-                                startSelection.end = (lines[index] as? String)?.count ?? 0 + 3
+                                startColumn = (lines[index] as? String)?.count ?? 0 + 3
+                                endColumn = (lines[index] as? String)?.count ?? 0 + 3
                             }
                         }
                     } else if !shouldComment && commented {
                         let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
                         lines[index] = linePrefix + uncommentedCode
-                        if startSelection.start >= linePrefix.count {
-                            startSelection.start = max(startSelection.start - 3, commentIndex!)
-                            startSelection.end = max(startSelection.end - 3, commentIndex!)
+                        if startColumn >= linePrefix.count {
+                            startColumn = max(startColumn - 3, commentIndex!)
+                            endColumn = max(endColumn - 3, commentIndex!)
                         }
                     }
                 }
             }
             
-            startRange.start.column = startSelection.start
-            startRange.end.column = startSelection.end
+            startRange.start.column = startColumn
+            startRange.end.column = endColumn
         }
         
         // 多行
@@ -140,40 +140,34 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                     if shouldComment {
                         lines[index] = linePrefix + "// " + code
                         if index == startLine {
-                            if startSelection.start >= linePrefix.count {
-                                startSelection.start = min(startSelection.start + 3, (lines[index] as? String)?.count ?? 0)
-                                startSelection.end = min(startSelection.end + 3, (lines[index] as? String)?.count ?? 0)
+                            if startColumn >= linePrefix.count {
+                                startColumn = min(startColumn + 3, (lines[index] as? String)?.count ?? 0)
                             }
                         }
                         if index == endLine {
-                            if endSelection.start >= linePrefix.count {
-                                endSelection.start = min(endSelection.start + 3, (lines[index] as? String)?.count ?? 0)
-                                endSelection.end = min(endSelection.end + 3, (lines[index] as? String)?.count ?? 0)
+                            if endColumn >= linePrefix.count {
+                                endColumn = min(endColumn + 3, (lines[index] as? String)?.count ?? 0)
                             }
                         }
                     } else if !shouldComment && commented {
                         let uncommentedCode = code.replacingOccurrences(of: "^// ?", with: "", options: .regularExpression)
                         lines[index] = linePrefix + uncommentedCode
                         if index == startLine {
-                            if startSelection.start >= linePrefix.count {
-                                startSelection.start = max(startSelection.start - 3, commentIndex!)
-                                startSelection.end = max(startSelection.end - 3, commentIndex!)
+                            if startColumn >= linePrefix.count {
+                                startColumn = max(startColumn - 3, commentIndex!)
                             }
                         }
                         if index == endLine {
-                            if endSelection.start >= linePrefix.count {
-                                endSelection.start = max(endSelection.start - 3, commentIndex!)
-                                endSelection.end = max(endSelection.end - 3, commentIndex!)
+                            if endColumn >= linePrefix.count {
+                                endColumn = max(endColumn - 3, commentIndex!)
                             }
                         }
                     }
                 }
             }
             
-            startRange.start.column = startSelection.start
-            startRange.end.column = startSelection.end
-            endRange.start.column = endSelection.start
-            endRange.end.column = endSelection.end
+            startRange.start.column = startColumn
+            endRange.end.column = endColumn
         }
         
         completionHandler(nil)
