@@ -1,5 +1,5 @@
 # Comments Plugin
-An Xcode extension, Replicate Sublime Text's shortcut for single-line comment mode.
+Xcode extension, Implemented single-line comment style like Sublime Text.
 
 ## Installation
 
