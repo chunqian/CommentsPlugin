@@ -9,7 +9,7 @@
 import Foundation
 import XcodeKit
 
-
+// ******************************** SourceEditorCommand ********************************
 class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
@@ -178,7 +178,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     
 }
 
-
+// ******************************** String ********************************
 extension String {
     var isEmptyLine: Bool {
         var result = true
@@ -192,7 +192,7 @@ extension String {
     }
 }
 
-
+// ******************************** XCSourceTextRange ********************************
 extension XCSourceTextRange {
     var isEmpty: Bool {
         return start.column == end.column && start.line == end.line
