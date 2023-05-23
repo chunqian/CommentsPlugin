@@ -689,6 +689,38 @@
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="8gH-P2-SOi">
+                        <rect key="frame" x="37" y="84" width="567" height="192"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" id="IeJ-di-aV4">
+                            <font key="font" usesAppearanceFont="YES"/>
+                            <string key="title">Installation
+
+1. Run the application at lease once, then close it.
+2. Go to System Preferences -&gt; Extensions -&gt; Xcode Source Editor and enable this extension
+3. Reopen Xcode and you can find this extension from Xcode menu.
+
+Setting Hot Key
+
+1. After installation, open Xcode &gt; Preferences &gt; Key Bindings
+2. Search for "CommentsPlugin".
+3. Assign it a new hot key, here "command + /" is recommended.
+</string>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="4z8-gI-w4d">
+                        <rect key="frame" x="37" y="295" width="567" height="34"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Thanks for using CommentsPlugin" id="QcP-EY-zZT">
+                            <font key="font" metaFont="system" size="26"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
             </view>
             <point key="canvasLocation" x="139" y="-120"/>
         </window>
