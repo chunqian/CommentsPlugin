@@ -10,13 +10,18 @@ import Cocoa
 
 // ******************************** AppDelegate ********************************
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
     @IBOutlet weak var window: NSWindow!
 
-
+    func windowWillClose(_ notification: Notification) {
+        // 关闭应用
+        NSApplication.shared.terminate(self)
+    }
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        self.window.delegate = self
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
