@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224990772AFDCD9400FF92EA /* XcodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224990762AFDCD9400FF92EA /* XcodeKit.framework */; };
+		224990782AFDCD9400FF92EA /* XcodeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224990762AFDCD9400FF92EA /* XcodeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		22718B892A48489200204035 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22718B882A48489200204035 /* Cocoa.framework */; };
 		22ADF7BF29F4DDBA00BDD6BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF7BE29F4DDBA00BDD6BD /* AppDelegate.swift */; };
 		22ADF7C129F4DDBB00BDD6BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22ADF7C029F4DDBB00BDD6BD /* Assets.xcassets */; };
 		22ADF7C429F4DDBB00BDD6BD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22ADF7C229F4DDBB00BDD6BD /* MainMenu.xib */; };
-		22ADF7D329F4DDE500BDD6BD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22ADF7D229F4DDE500BDD6BD /* Cocoa.framework */; };
 		22ADF7D629F4DDE500BDD6BD /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF7D529F4DDE500BDD6BD /* SourceEditorExtension.swift */; };
 		22ADF7D829F4DDE500BDD6BD /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF7D729F4DDE500BDD6BD /* SourceEditorCommand.swift */; };
 		22ADF7DD29F4DDE500BDD6BD /* CommentsPluginExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22ADF7D029F4DDE500BDD6BD /* CommentsPluginExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -27,6 +29,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		224990792AFDCD9400FF92EA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				224990782AFDCD9400FF92EA /* XcodeKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22ADF7E129F4DDE500BDD6BD /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -41,6 +54,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		224990762AFDCD9400FF92EA /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
+		22718B882A48489200204035 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		22ADF7BB29F4DDBA00BDD6BD /* CommentsPlugin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommentsPlugin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22ADF7BE29F4DDBA00BDD6BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22ADF7C029F4DDBB00BDD6BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,7 +63,6 @@
 		22ADF7C529F4DDBB00BDD6BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22ADF7C629F4DDBB00BDD6BD /* CommentsPlugin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommentsPlugin.entitlements; sourceTree = "<group>"; };
 		22ADF7D029F4DDE500BDD6BD /* CommentsPluginExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CommentsPluginExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		22ADF7D229F4DDE500BDD6BD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		22ADF7D529F4DDE500BDD6BD /* SourceEditorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorExtension.swift; sourceTree = "<group>"; };
 		22ADF7D729F4DDE500BDD6BD /* SourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorCommand.swift; sourceTree = "<group>"; };
 		22ADF7D929F4DDE500BDD6BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -67,20 +81,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22ADF7D329F4DDE500BDD6BD /* Cocoa.framework in Frameworks */,
+				22718B892A48489200204035 /* Cocoa.framework in Frameworks */,
+				224990772AFDCD9400FF92EA /* XcodeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22718B872A48489200204035 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				224990762AFDCD9400FF92EA /* XcodeKit.framework */,
+				22718B882A48489200204035 /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		22ADF7B229F4DDBA00BDD6BD = {
 			isa = PBXGroup;
 			children = (
 				22ADF7BD29F4DDBA00BDD6BD /* CommentsPlugin */,
 				22ADF7D429F4DDE500BDD6BD /* CommentsPluginExtension */,
-				22ADF7D129F4DDE500BDD6BD /* Frameworks */,
 				22ADF7BC29F4DDBA00BDD6BD /* Products */,
+				22718B872A48489200204035 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,14 +127,6 @@
 				22ADF7C629F4DDBB00BDD6BD /* CommentsPlugin.entitlements */,
 			);
 			path = CommentsPlugin;
-			sourceTree = "<group>";
-		};
-		22ADF7D129F4DDE500BDD6BD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				22ADF7D229F4DDE500BDD6BD /* Cocoa.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		22ADF7D429F4DDE500BDD6BD /* CommentsPluginExtension */ = {
@@ -153,6 +169,7 @@
 				22ADF7CC29F4DDE500BDD6BD /* Sources */,
 				22ADF7CD29F4DDE500BDD6BD /* Frameworks */,
 				22ADF7CE29F4DDE500BDD6BD /* Resources */,
+				224990792AFDCD9400FF92EA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -309,7 +326,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -363,7 +380,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -381,7 +398,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPlugin/Info.plist;
@@ -389,6 +406,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -405,7 +423,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPlugin/Info.plist;
@@ -413,6 +431,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -427,7 +446,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPluginExtension/Info.plist;
@@ -436,6 +455,8 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin.CommentsPluginExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -451,7 +472,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPluginExtension/Info.plist;
@@ -460,6 +481,8 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin.CommentsPluginExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
