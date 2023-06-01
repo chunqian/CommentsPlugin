@@ -1,4 +1,7 @@
 # Comments Plugin
+
+![](./Logo.png)
+
 Xcode extension, Implemented single-line comment style like Sublime Text.
 
 ## Installation
