@@ -2,7 +2,7 @@
 
 <img src="./Logo.png" style="width: 64px;" />
 
-Xcode extension, Implemented single-line comment style like Sublime Text.
+CommentsPlugin is a plugin specifically designed for Xcode. It meticulously replicates the convenient comment functionality of Sublime Text, providing an elegant and efficient code commenting experience.
 
 ## Installation
 
