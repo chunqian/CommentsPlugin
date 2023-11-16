@@ -66,7 +66,6 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             for index in startLine...endLine {
                 guard let line = lines.object(at: index) as? NSString else { continue }
                 let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
-                
                 let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
                 
                 commentIndex = commentIndex == nil ? range.location : min(commentIndex!, range.location)
@@ -115,8 +114,8 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             for index in startLine...endLine {
                 guard let line = lines.object(at: index) as? NSString else { continue }
                 let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
-                
                 let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
+                
                 if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmptyLine {
                     continue
                 }
