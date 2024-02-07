@@ -21,7 +21,6 @@ class TAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                           styleMask: [.titled, .closable, .miniaturizable, .resizable],
                           backing: .buffered, defer: false)
         window.title = "CommentsPlugin"
-        window.makeKeyAndOrderFront(nil)
         
         // 创建菜单
         mainMenu = TMainMenu()
@@ -38,6 +37,7 @@ class TAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         setupContentView()
         // 代理设置
         self.window.delegate = self
+        window.makeKeyAndOrderFront(nil)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
