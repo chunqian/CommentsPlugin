@@ -1,6 +1,6 @@
 # Comments Plugin
 
-<img src="./Logo.png" style="width: 64px;" />
+<img src="/Logo.png" style="width: 64px;" />
 
 CommentsPlugin is a plugin specifically designed for Xcode. It meticulously replicates the convenient comment functionality of Sublime Text, providing an elegant and efficient code commenting experience.
 
