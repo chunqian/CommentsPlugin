@@ -10,7 +10,6 @@
 		224990772AFDCD9400FF92EA /* XcodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224990762AFDCD9400FF92EA /* XcodeKit.framework */; };
 		224990782AFDCD9400FF92EA /* XcodeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 224990762AFDCD9400FF92EA /* XcodeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		22718B892A48489200204035 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22718B882A48489200204035 /* Cocoa.framework */; };
-		228BD3E22B6B83DE009582C1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 228BD3E12B6B83DE009582C1 /* SnapKit */; };
 		228BD3E42B6B8456009582C1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BD3E32B6B8456009582C1 /* main.swift */; };
 		228BD3E62B6B84D5009582C1 /* menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BD3E52B6B84D5009582C1 /* menus.swift */; };
 		22ADF7BF29F4DDBA00BDD6BD /* appdelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF7BE29F4DDBA00BDD6BD /* appdelegate.swift */; };
@@ -18,6 +17,7 @@
 		22ADF7D629F4DDE500BDD6BD /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF7D529F4DDE500BDD6BD /* SourceEditorExtension.swift */; };
 		22ADF7D829F4DDE500BDD6BD /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF7D729F4DDE500BDD6BD /* SourceEditorCommand.swift */; };
 		22ADF7DD29F4DDE500BDD6BD /* CommentsPluginExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22ADF7D029F4DDE500BDD6BD /* CommentsPluginExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		22E87F902B89A7EF00A74A3B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22E87F8F2B89A7EF00A74A3B /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +58,6 @@
 /* Begin PBXFileReference section */
 		224990762AFDCD9400FF92EA /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
 		22718B882A48489200204035 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		228BD3E02B6B83BE009582C1 /* SnapKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SnapKit; path = Packages/SnapKit; sourceTree = "<group>"; };
 		228BD3E32B6B8456009582C1 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		228BD3E52B6B84D5009582C1 /* menus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = menus.swift; sourceTree = "<group>"; };
 		22ADF7BB29F4DDBA00BDD6BD /* CommentsPlugin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommentsPlugin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				228BD3E22B6B83DE009582C1 /* SnapKit in Frameworks */,
+				22E87F902B89A7EF00A74A3B /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,18 +102,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		228BD3DF2B6B83BE009582C1 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				228BD3E02B6B83BE009582C1 /* SnapKit */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		22ADF7B229F4DDBA00BDD6BD = {
 			isa = PBXGroup;
 			children = (
-				228BD3DF2B6B83BE009582C1 /* Packages */,
 				22ADF7BD29F4DDBA00BDD6BD /* CommentsPlugin */,
 				22ADF7D429F4DDE500BDD6BD /* CommentsPluginExtension */,
 				22ADF7BC29F4DDBA00BDD6BD /* Products */,
@@ -174,7 +164,7 @@
 			);
 			name = CommentsPlugin;
 			packageProductDependencies = (
-				228BD3E12B6B83DE009582C1 /* SnapKit */,
+				22E87F8F2B89A7EF00A74A3B /* SnapKit */,
 			);
 			productName = CommentsPlugin;
 			productReference = 22ADF7BB29F4DDBA00BDD6BD /* CommentsPlugin.app */;
@@ -225,6 +215,9 @@
 				Base,
 			);
 			mainGroup = 22ADF7B229F4DDBA00BDD6BD;
+			packageReferences = (
+				22E87F8E2B89A7EF00A74A3B /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 22ADF7BC29F4DDBA00BDD6BD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -406,7 +399,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPlugin/Info.plist;
@@ -414,7 +407,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -431,7 +424,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPlugin/Info.plist;
@@ -439,7 +432,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -454,7 +447,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPluginExtension/Info.plist;
@@ -464,7 +457,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin.CommentsPluginExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -480,7 +473,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPluginExtension/Info.plist;
@@ -490,7 +483,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 2.4;
+				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin.CommentsPluginExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -531,9 +524,21 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		22E87F8E2B89A7EF00A74A3B /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		228BD3E12B6B83DE009582C1 /* SnapKit */ = {
+		22E87F8F2B89A7EF00A74A3B /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 22E87F8E2B89A7EF00A74A3B /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */

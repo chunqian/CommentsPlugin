@@ -3,6 +3,3 @@
 *.xcworkspace
 !default.xcworkspace
 xcuserdata/
-
-# Packages
-SnapKit/
