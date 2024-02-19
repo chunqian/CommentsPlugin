@@ -52,6 +52,9 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         // 空行
         var isEmptyLines = true
         for index in startLine...endLine {
+            if index >= lines.count {
+                break
+            }
             guard let line = lines.object(at: index) as? NSString else { continue }
             let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
             
@@ -64,6 +67,9 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         // 单行
         if numberOfSelectionLines == 0 || isEmptyLines {
             for index in startLine...endLine {
+                if index >= lines.count {
+                    break
+                }
                 guard let line = lines.object(at: index) as? NSString else { continue }
                 let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
                 let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
@@ -76,6 +82,9 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             }
             
             for index in startLine...endLine {
+                if index >= lines.count {
+                    break
+                }
                 guard let line = lines.object(at: index) as? NSString else { continue }
                 
                 if commentIndex! < line.length {
@@ -112,6 +121,9 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         // 多行
         if numberOfSelectionLines > 0 && !isEmptyLines {
             for index in startLine...endLine {
+                if index >= lines.count {
+                    break
+                }
                 guard let line = lines.object(at: index) as? NSString else { continue }
                 let code = line.trimmingCharacters(in: .whitespacesAndNewlines)
                 let range = line.rangeOfCharacter(from: CharacterSet.whitespaces.inverted)
@@ -127,6 +139,9 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             }
             
             for index in startLine...endLine {
+                if index >= lines.count {
+                    break
+                }
                 guard let line = lines.object(at: index) as? NSString else { continue }
                 
                 if line.trimmingCharacters(in: .whitespacesAndNewlines).isEmptyLine {
