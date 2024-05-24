@@ -12,7 +12,7 @@ xcodebuild -resolvePackageDependencies -scmProvider system
 
 ## Installation
 
-1. Run the application at lease once, then close it.
+1. Run the application at least once, then close it.
 2. Go to System Preferences > Extensions > Xcode Source Editor and enable this extension.
 3. Reopen Xcode and you can find this extension from Xcode Menu > Editor.
 
