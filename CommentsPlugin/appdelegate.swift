@@ -7,14 +7,14 @@
 //
 
 import Cocoa
-import SnapKit
 
-// ******************************** AppDelegate ********************************
+// ------------------------------------
 class TAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
-
+    // ------------------
     var window: NSWindow!
     var mainMenu: TMainMenu!
     
+    // ------------------
     override init() {
         // 创建窗口
         window = NSWindow(contentRect: NSMakeRect(335, 390, 640, 360),
@@ -26,12 +26,14 @@ class TAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         mainMenu = TMainMenu()
         super.init()
     }
-
+    
+    // ------------------
     func windowWillClose(_ notification: Notification) {
         // 关闭应用
         NSApplication.shared.terminate(self)
     }
     
+    // ------------------
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // 创建文本
         setupContentView()
@@ -39,11 +41,13 @@ class TAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         self.window.delegate = self
         window.makeKeyAndOrderFront(nil)
     }
-
+    
+    // ------------------
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
     
+    // ------------------
     func setupContentView() {
         // 确保窗口已被创建
         guard let contentView = window.contentView else { return }
@@ -72,25 +76,31 @@ class TAppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         instructionTextField.stringValue = textField
         contentView.addSubview(instructionTextField)
 
-        // 使用 SnapKit 设置自动布局
-        instructionTextField.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(84)
-            make.left.equalToSuperview().offset(37)
-            make.right.equalToSuperview().offset(-37)
-            make.height.equalTo(192)
-        }
+        // 禁用自动调整大小掩码转换为约束
+        instructionTextField.translatesAutoresizingMaskIntoConstraints = false
+
+        // 使用 Auto Layout 设置约束
+        NSLayoutConstraint.activate([
+            instructionTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 84),
+            instructionTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 37),
+            instructionTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -37),
+            instructionTextField.heightAnchor.constraint(equalToConstant: 192)
+        ])
 
         // 创建并配置第二个文本域
         let thanksTextField = NSTextField(labelWithString: "Thanks for using CommentsPlugin")
         thanksTextField.font = NSFont.systemFont(ofSize: 26)
         contentView.addSubview(thanksTextField)
 
-        // 使用 SnapKit 设置自动布局
-        thanksTextField.snp.makeConstraints { make in
-            make.bottom.equalTo(instructionTextField.snp.top).offset(-19)
-            make.left.equalToSuperview().offset(37)
-            make.right.equalToSuperview().offset(-37)
-            make.height.equalTo(34)
-        }
+        // 禁用自动调整大小掩码转换为约束
+        thanksTextField.translatesAutoresizingMaskIntoConstraints = false
+
+        // 使用 Auto Layout 设置约束
+        NSLayoutConstraint.activate([
+            thanksTextField.bottomAnchor.constraint(equalTo: instructionTextField.topAnchor, constant: -19),
+            thanksTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 37),
+            thanksTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -37),
+            thanksTextField.heightAnchor.constraint(equalToConstant: 34)
+        ])
     }
 }
