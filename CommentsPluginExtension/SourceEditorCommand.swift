@@ -14,7 +14,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     // ------------------
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
         
-        print("--------------command start--------------")
+        print("--------------Command start--------------")
         let buffer = invocation.buffer
         let selections = buffer.selections
         let lines = buffer.lines
@@ -187,7 +187,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         completionHandler(nil)
         
         print("final selections are \(selections)")
-        print("--------------command end--------------")
+        print("--------------Command end--------------")
     }
     
 }
