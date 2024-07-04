@@ -12,15 +12,15 @@ import AppKit
 // ------------------------------------
 class TMainMenu: NSMenu {
     // ------------------
-    var commentsPluginMenuItem: NSMenuItem
+    var commentsPlugin: NSMenuItem
     
     // ------------------
     init() {
-        commentsPluginMenuItem = NSMenuItem()
-        commentsPluginMenuItem.submenu = TCommentsPluginMenu()
+        commentsPlugin = NSMenuItem()
+        commentsPlugin.submenu = TCommentsPluginMenu()
         super.init(title: "MainMenu")
         
-        addItem(commentsPluginMenuItem)
+        addItem(commentsPlugin)
     }
     
     // ------------------
@@ -32,18 +32,18 @@ class TMainMenu: NSMenu {
 // ------------------------------------
 class TCommentsPluginMenu: NSMenu {
     // ------------------
-    var aboutMenuItem: TAboutMenuItem
-    var quitMenuItem: TQuitMenuItem
+    var about: TAboutMenuItem
+    var quit: TQuitMenuItem
     
     // ------------------
     init() {
-        aboutMenuItem = TAboutMenuItem()
-        quitMenuItem = TQuitMenuItem()
+        about = TAboutMenuItem()
+        quit = TQuitMenuItem()
         super.init(title: "CommentsPlugin")
         
-        addItem(aboutMenuItem)
+        addItem(about)
         addItem(NSMenuItem.separator())
-        addItem(quitMenuItem)
+        addItem(quit)
     }
     
     // ------------------
