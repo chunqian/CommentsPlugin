@@ -16,6 +16,7 @@
 		22ADF7D629F4DDE500BDD6BD /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF7D529F4DDE500BDD6BD /* SourceEditorExtension.swift */; };
 		22ADF7D829F4DDE500BDD6BD /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22ADF7D729F4DDE500BDD6BD /* SourceEditorCommand.swift */; };
 		22ADF7DD29F4DDE500BDD6BD /* CommentsPluginExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22ADF7D029F4DDE500BDD6BD /* CommentsPluginExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C01000000000000000000001 /* CommentToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01000000000000000000002 /* CommentToggle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		22ADF7D729F4DDE500BDD6BD /* SourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorCommand.swift; sourceTree = "<group>"; };
 		22ADF7D929F4DDE500BDD6BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22ADF7DA29F4DDE500BDD6BD /* CommentsPluginExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommentsPluginExtension.entitlements; sourceTree = "<group>"; };
+		C01000000000000000000002 /* CommentToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentToggle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			children = (
 				22ADF7DA29F4DDE500BDD6BD /* CommentsPluginExtension.entitlements */,
 				22ADF7D929F4DDE500BDD6BD /* Info.plist */,
+				C01000000000000000000002 /* CommentToggle.swift */,
 				22ADF7D729F4DDE500BDD6BD /* SourceEditorCommand.swift */,
 				22ADF7D529F4DDE500BDD6BD /* SourceEditorExtension.swift */,
 			);
@@ -255,6 +258,7 @@
 			files = (
 				22ADF7D629F4DDE500BDD6BD /* SourceEditorExtension.swift in Sources */,
 				22ADF7D829F4DDE500BDD6BD /* SourceEditorCommand.swift in Sources */,
+				C01000000000000000000001 /* CommentToggle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +402,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 26.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -425,7 +429,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 26.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -450,7 +454,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 26.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin.CommentsPluginExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -476,7 +480,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 26.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin.CommentsPluginExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";

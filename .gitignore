@@ -3,3 +3,5 @@
 *.xcworkspace
 !default.xcworkspace
 xcuserdata/
+.build/
+.swiftpm/
