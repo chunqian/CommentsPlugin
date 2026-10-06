@@ -393,7 +393,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 62;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPlugin/Info.plist;
@@ -403,7 +403,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 26.0.1;
+				MARKETING_VERSION = 27.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -420,7 +420,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 62;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPlugin/Info.plist;
@@ -430,7 +430,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 26.0.1;
+				MARKETING_VERSION = 27.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -445,7 +445,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 62;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPluginExtension/Info.plist;
@@ -455,7 +455,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 26.0.1;
+				MARKETING_VERSION = 27.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin.CommentsPluginExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -471,7 +471,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 62;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = CommentsPluginExtension/Info.plist;
@@ -481,7 +481,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 26.0.1;
+				MARKETING_VERSION = 27.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chunqian.CommentsPlugin.CommentsPluginExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
